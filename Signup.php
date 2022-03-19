@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+include_once 'assets/headerfooter/Header.php';
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>cemetery New</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/Footer-Clean.css">
-    <link rel="stylesheet" href="assets/css/Map-Clean.css">
-    <link rel="stylesheet" href="assets/css/Social-Icons.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-
-<body>
+?>
     <div class="d-flex justify-content-center">
         <div style="padding: 0;margin: 0;width: 732px;">
-            <form>
+            <form method="POST" action="">
                 <div class="container">
                     <div class="row">
                         <div class="col">
@@ -71,15 +59,12 @@
                     </div>
                     <div class="row">
                         <div class="col d-flex flex-column justify-content-center" style="padding: 15px;"><button class="btn btn-primary" type="button">Sign Up</button>
-                            <p class="text-center">Already created account?&nbsp;<a href="#">Log in</a></p>
+                            <p class="text-center">Already created account?&nbsp;<a href="Login.php">Log in</a></p>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-</body>
-
-</html>
+<?php 
+include_once 'assets/headerfooter/Footer.php'; ?>
