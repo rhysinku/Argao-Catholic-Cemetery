@@ -14,6 +14,8 @@ else{
     include_once 'assets/headerfooter/Header.php';
 }
 
+require_once 'assets/php/dbconnection.php';
+
 ?>
     <div style="padding: 27px;">
         <h1 class="text-center">Transaction</h1>
@@ -34,18 +36,27 @@ else{
                             <th>Action</th>
                         </tr>
                     </thead>
+                    <?php 
+                    $num= 1;
+                    $tableview = $conn->query("SELECT * FROM booking LEFT JOIN user ON booking.userid = user.userId");
+                    while ($view = $tableview->fetch_assoc()):
+                        $bdate = date(" F, d, Y h:i A",strtotime($view['corpsetimestamp'])) ;
+                        $dob = date(" F, d, Y h:i A",strtotime($view['dateBirth'])) ;
+                        $dod = date(" F, d, Y h:i A",strtotime($view['dateDeath'])) ;
+                    ?>
                     <tbody>
                         <tr>
-                            <td>Cell 1</td>
-                            <td>Cell 2</td>
-                            <td>Cell 2</td>
-                            <td>Cell 2</td>
-                            <td>Cell 2</td>
-                            <td>Cell 2</td>
-                            <td>Cell 2</td>
+                            <td><?php echo $num++?></td>
+                            <td><?php echo $view['userName'];?></td>
+                            <td><?php echo $view['fnamecorpse'] ?></td>
+                            <td><?php echo $bdate ?></td>
+                            <td><?php echo $view['payment'] ?></td>
+                            <td><?php echo $view['adminapprove'] ?></td>
+                            <td><?php echo $view['gcash'] ?></td>
                             <td class="d-flex">
-                                <div style="height: 0px;"><a class="btn btn-info btn-lg" role="button" href="#myModal" data-bs-toggle="modal" style="font-size: 16px;" data-bs-target="#myModal-1">Preview</a>
-                                    <div class="modal fade" role="dialog" tabindex="-1" id="myModal-1">
+                            <a class="btn btn-info btn-lg" role="button" href="#preview<?php echo $view['id']; ?>" data-bs-toggle="modal">Preview</a>
+
+                                    <div class="modal fade" role="dialog" tabindex="-1" id="preview<?php echo $view['id']; ?>">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -58,81 +69,125 @@ else{
                                                             <thead>
                                                                 <tr>
                                                                     <th>Decease Name</th>
-                                                                    <th>Column 2</th>
+                                                                    <th><?php echo $view['fnamecorpse']; ?></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
                                                                     <td>Last Name</td>
-                                                                    <td>Cell 2</td>
+                                                                    <td><?php echo $view['lnamecorpse']; ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Date of Birth</td>
-                                                                    <td>Cell 2</td>
+                                                                    <td><?php echo $dob; ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Date of Death</td>
-                                                                    <td>Cell 4</td>
+                                                                    <td><?php echo $dod; ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Type of Lubong</td>
-                                                                    <td>Cell 4</td>
+                                                                    <td><?php echo $view['typegrave']; ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Gender</td>
-                                                                    <td>Cell 4</td>
+                                                                    <td><?php echo $view['gender']; ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Nationality</td>
-                                                                    <td>Cell 4</td>
+                                                                    <td><?php echo $view['nationality']; ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Religion</td>
-                                                                    <td>Cell 4</td>
+                                                                    <td>C<?php echo $view['corpseReligion']; ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Payment</td>
-                                                                    <td>Cell 4</td>
+                                                                    <td><?php echo $view['payment']; ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Gcash Number</td>
-                                                                    <td>Cell 4</td>
+                                                                    <td><?php echo $view['gcash']; ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Screenshot</td>
-                                                                    <td><img></td>
+                                                                    <?php 
+                                        if ($view['bookimg'] == "")
+                                        { ?>
+
+                                            <td>No ScreenShot</td>
+                                    <?php
+                                        }
+                                        else
+                                        {?>
+                                     <td class="d-flex justify-content-center"><img src="./assets/imageDb/<?php echo $view['bookimg'];?>" width="50%"></td>
+
+                                    <?php
+                                        }
+                                        ?>
+
                                                                 </tr>
                                                             </tbody>
+                                                         
                                                         </table>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer"></div>
+                                                <div class="modal-footer">
+                                                <?php if($view['adminapprove'] == 'waiting')
+                                                                {
+                                                                    $adminapprove = "";
+                                                                }
+                                                                else{
+                                                                    $adminapprove = "hidden";
+                                                                } ?>
+
+                                                    <a <?php echo $adminapprove ?> class="btn btn-warning" type="button" href="Approval.php?ID=<?php echo $view['id']?>&&Name=<?php echo $view['userName']; ?>" >Approve Payment</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div style="height: 0px;"><a class="btn btn-danger btn-lg" role="button" href="#myModal" data-bs-toggle="modal" style="font-size: 16px;" data-bs-target="#myModal-2">Delete</a>
-                                    <div class="modal fade" role="dialog" tabindex="-1" id="myModal-2">
+                                <a class="btn btn-danger btn-lg" role="button" href="#delete<?php echo $view['id']; ?>" data-bs-toggle="modal">Delete</a>
+                                    <div class="modal fade" role="dialog" tabindex="-1" id="delete<?php echo $view['id']; ?>">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4>Delete User's&nbsp; Transaction Data</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <h4>Delete <?php echo $view['userName'] ?>'s&nbsp; Transaction Data</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p class="text-center text-muted">Are you sure to DELETE this data?</p>
                                                 </div>
-                                                <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-danger" type="button">Delete</button></div>
+                                                <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+                                                <a href="assets/php/dbSimpleConfig.php?bookCdelete=<?php echo $view['id'];?>" class="btn btn-danger" type="button">Delete</a>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                
                             </td>
                         </tr>
+                        <?php endwhile ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
     <?php
-include_once 'assets/headerfooter/Footer.php';
+session_start();
+if (isset($_SESSION['userID']))
+{
+    if($_SESSION['userID'] == 1)
+    {
+        include_once 'assets/headerfooter/adminFooter.php';
+    }
+    else{
+        include_once 'assets/headerfooter/Footer.php';
+    }
+}
+else{
+    include_once 'assets/headerfooter/Footer.php';
+}
+
 ?>

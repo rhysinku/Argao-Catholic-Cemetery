@@ -112,5 +112,19 @@ $conn = mysqli_connect("localhost", "root", "", "cemetery");?>
 
 
     <?php
-include_once 'assets/headerfooter/Footer.php';
+session_start();
+if (isset($_SESSION['userID']))
+{
+    if($_SESSION['userID'] == 1)
+    {
+        include_once 'assets/headerfooter/adminFooter.php';
+    }
+    else{
+        include_once 'assets/headerfooter/Footer.php';
+    }
+}
+else{
+    include_once 'assets/headerfooter/Footer.php';
+}
+
 ?>

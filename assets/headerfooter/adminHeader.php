@@ -25,7 +25,7 @@
                     
 
                     <li class="nav-item"><a class="nav-link" href="#">Admin</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Users</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Users.php">Users</a></li>
                     <li class="nav-item"><a class="nav-link" href="Transaction.php">Transactions</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Decease</a></li>
 
@@ -37,7 +37,7 @@
 
                             <!-- <a class="dropdown-item" href="#"><strong>User send Payment</strong></a></div> -->
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./assets/php/dbLogout.php">Logout</a></li>
 
 
 

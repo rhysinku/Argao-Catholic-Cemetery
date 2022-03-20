@@ -25,6 +25,22 @@ else{
         <p class="fw-normal text-center" style="font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor&nbsp;<br>incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis&nbsp;<br>nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&nbsp;<br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore&nbsp;<br>eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,&nbsp;<br>sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
 
+
+
 <?php
-include_once 'assets/headerfooter/Footer.php';
+session_start();
+if (isset($_SESSION['userID']))
+{
+    if($_SESSION['userID'] == 1)
+    {
+        include_once 'assets/headerfooter/adminFooter.php';
+    }
+    else{
+        include_once 'assets/headerfooter/Footer.php';
+    }
+}
+else{
+    include_once 'assets/headerfooter/Footer.php';
+}
+
 ?>
