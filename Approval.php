@@ -112,7 +112,7 @@ $conn = mysqli_connect("localhost", "root", "", "cemetery");?>
 
 
     <?php
-session_start();
+
 if (isset($_SESSION['userID']))
 {
     if($_SESSION['userID'] == 1)
