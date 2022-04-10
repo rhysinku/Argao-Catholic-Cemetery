@@ -17,9 +17,8 @@ else{
 require_once 'assets/php/dbconnection.php';
 
 ?>
- <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+
+
 
 <body>
     <div style="padding: 20px;">
@@ -89,7 +88,7 @@ require_once 'assets/php/dbconnection.php';
 
     <div style="padding: 15px;">
         <div class="table-responsive">
-            <table class="table" id="example">
+            <table class="table table-hover" id="example">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -110,7 +109,7 @@ require_once 'assets/php/dbconnection.php';
             //     Y/F/d 
 
         ?>
-                    <tr>
+                    
 
                     <tr>
                         <td><?php echo $usernum++; ?></td>
@@ -206,6 +205,15 @@ require_once 'assets/php/dbconnection.php';
         </div>
     </div>
 
+    <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#example').DataTable( {
+                        "paging":   false,
+                       
+                        "info":     false
+                    } );
+                } );
+    </script>
 
     <script>
                                           function showpass() {
@@ -219,18 +227,8 @@ require_once 'assets/php/dbconnection.php';
                                           </script>
 
 
-<script type="text/javascript">
-        $(document).ready(function() {
-    $('#example').DataTable({
-        "paging":   false,
-        "ordering": false,
-        "info":     false
-    });
-} );
-    </script>
-
 <?php
-session_start();
+
 if (isset($_SESSION['userID']))
 {
     if($_SESSION['userID'] == 1)

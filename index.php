@@ -126,7 +126,7 @@ else{
                         , stroke: "#ced8d0"
                     }
                     , attrsHover: {
-                        fill: "#a4e100"
+                        fill: "#50c878"
                     }
                     , text: {
                         attrs: {
@@ -142,23 +142,53 @@ else{
 
             areas: {
                 "Entrance":{
-                    tooltip: {content: "<span style=\"font-weight:bold;\">Entrace"}  
+                    tooltip: {content: "<span style=\"font-weight:bold;\">Entrace"}  ,
+                    attrs:{
+                        fill: "#01ff00"
+                    }
                 },
+
                 "Statue":{
-                    tooltip:{content: "<span style=\"font-weight:bold;\">Cross Statue"}
+                    tooltip:{content: "<span style=\"font-weight:bold;\">Cross Statue"},
+                    attrs:{
+                        fill: "#444444"
+                    }
                 },
+
                 "Office":{
-                tooltip:{content: "<span style=\"font-weight:bold;\">Office"}
+                tooltip:{content: "<span style=\"font-weight:bold;\">Office"},
+                attrs:{
+                    fill: "#444444"
+                }
                 },
+
                 "Building":{
-                 tooltip:{content: "<span style=\"font-weight:bold;\">Building"}
+                 tooltip:{content: "<span style=\"font-weight:bold;\">Building"},
+                 attrs:{
+             fill: "#444444"
+                        }
                 },
                 "Grave1":{
                  tooltip:{content: "<span style=\"font-weight:bold;\">Grave #1"}
+                 , attrsHover: {
+                     fill: "#999999"
+                    }
+                 
                 },
                  "Grave2":{
                  tooltip:{content: "<span style=\"font-weight:bold;\">Grave #2"}
+                 , attrsHover: {
+                      fill: "#999999"
+                     }
+                },
+
+                "fp1 01":{
+                    tooltip:{content: "<span style=\"font-weight:bold;\">Number 1"}
                 }
+
+
+
+
             }
         });
     });
