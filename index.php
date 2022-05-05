@@ -69,7 +69,7 @@ else{
 
     <div style="margin: 26px;">
         <h1 class="text-center">Argao Catholic Cemetery</h1>
-        <p class="fw-normal text-center" style="font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor&nbsp;<br>incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis&nbsp;<br>nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&nbsp;<br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore&nbsp;<br>eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,&nbsp;<br>sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p class="fw-normal text-center" style="font-size: 14px;">For St. Michael's Area Church, the analysts are required to perform a study on the creation of a standalone web-based framework,&nbsp;<br>which we believe will reduce the irregularity in information transmission, room for errors, and miskeying data. This framework will be used in the office on a day-to-day basis.&nbsp;<br>If you want to keep track of all your transactions, the framework will help you.&nbsp;<br>
     </div>
 
 
@@ -79,6 +79,7 @@ if (isset($_SESSION['userID']))
 {
     if($_SESSION['userID'] == 1)
     {
+        include_once 'AdminDash.php';
         include_once 'assets/headerfooter/adminFooter.php';
     }
     else{
@@ -184,6 +185,12 @@ else{
 
                 "fp1 01":{
                     tooltip:{content: "<span style=\"font-weight:bold;\">Number 1"}
+                },
+
+                "fp1 01":{
+                    text: {content: "Coffin 1", attrs: {"font-size": 3}},
+                    value: "Value 1"
+                    
                 }
 
 
