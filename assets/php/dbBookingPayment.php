@@ -5,6 +5,7 @@ session_start();
 $id =  $_SESSION["userID"];
 $id2 = $_SESSION["payid"];
 $accpass = $_POST["accpass"];
+$refNum = $_POST["refNum"];
 $gcash = $_POST["gcash"];
 $admin = "waiting";
 $imagename =$_FILES['bookimg']['name'];
@@ -23,30 +24,43 @@ if(isset($_POST["pay"]))
 
         if($accpass == $row['userPwd'])
         {
+
+            $sql3 = "SELECT RefNum FROM booking WHERE Refnum = '$refNum'";
+            $result2 = mysqli_query($conn, $sql3);
             
-            $sql2 = "UPDATE booking SET adminapprove = '$admin' ,  gcash='$gcash' , bookimg = '$newimage' WHERE id = '$id2'";
-            if(mysqli_query($conn,$sql2))
+
+            if(mysqli_num_rows($result2))
             {
-                    
-
-                    $location = '../../assets/imageDb/'.$newimage;
-                
-                    move_uploaded_file($imagetemp,$location);
-
-
-                    header("Location: ../../UserProfile.php?succ=BookSuc");
-               /*  $sql3 ="INSERT INTO bookingimage (bookId,bkimage) VALUES ('$id2','$newimage')";
-                mysqli_query($conn,$sql3); */
-                
-                //error testing
-              /*   echo mysqli_errno($conn); 
-
-                echo $newimage;
-                echo "<pre>";
-                print_r($_FILES['bookimg']);
-                echo "<pre>";  */
+                header("Location: ../../BookingPayment.php?error=IncorrectRefNum");  
+      
             }
 
+            else{
+
+                   
+                 $sql2 = "UPDATE booking SET adminapprove = '$admin' ,  gcash='$gcash' ,Refnum = '$refNum', bookimg = '$newimage' WHERE id = '$id2'";
+                 if(mysqli_query($conn,$sql2))
+                 {
+                
+                         $location = '../../assets/imageDb/'.$newimage;
+                
+                         move_uploaded_file($imagetemp,$location);
+                         header("Location: ../../UserProfile.php?succ=BookSuc");
+                 /*  $sql3 ="INSERT INTO bookingimage (bookId,bkimage) VALUES ('$id2','$newimage')";
+                     mysqli_query($conn,$sql3); */
+                
+                     //error testing
+                 /*   echo mysqli_errno($conn); 
+                     echo $newimage;
+                     echo "<pre>";
+                     print_r($_FILES['bookimg']);
+                     echo "<pre>";  */
+                 }
+                             
+               
+            }
+
+        
         }
         else
         {

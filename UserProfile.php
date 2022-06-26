@@ -1,5 +1,37 @@
 <?php
 session_start();
+
+
+if(isset($_GET["error"]))
+{
+    if ($_GET["error"] == "IncorrectPass")
+    {
+        $error = " <span class='text-danger' style='font-size: 12px; text-align: center;' >Incorrect Password</span> ";
+    }
+
+    if ($_GET["error"] == "IncorrectRefNum")
+{
+    $error = " <span class='text-danger' style='font-size: 12px;' >Reference Number Already Exist</span> ";
+}
+   
+}
+else
+{
+    $error = "";
+}
+
+if(isset($_GET["succ"]))
+{
+    if($_GET["succ"]== "PaySuc")
+    {
+        $succ = " <p class='text-center text-secondary'>Upon approving from the admin, processing can take at least an<span style='font-weight: bold;color: var(--bs-red);'> hour</span> .</p>";
+    }
+}
+else
+{
+    $succ = "";
+}
+
 if (isset($_SESSION['userID']))
 {
     if($_SESSION['userID'] == 1)
@@ -17,6 +49,7 @@ else{
 include_once 'assets/php/dbProfile.php';
 ?>
 
+ 
     <div style="height: 60px;padding: 10px;">
         <h1 class="text-center"><?php echo $_SESSION['user']; ?>'s Profile (#<?php echo $_SESSION['userID'] ?>)</h1>
     </div>
@@ -56,6 +89,8 @@ include_once 'assets/php/dbProfile.php';
     </div>
     <div style="padding: 10px;">
         <h1>Booking History</h1>
+        <?php echo $error; ?>
+        <?php echo $succ; ?>
         </div>
     <div class="d-flex justify-content-center">
         <div class="table-responsive" style="width: 1088.594px;">
@@ -95,7 +130,7 @@ include_once 'assets/php/dbProfile.php';
                             <div style="height: 0px;">
 
                            <a class="btn btn-primary btn-lg" role="button" href="#preview<?php echo $view['id'];?>" data-bs-toggle="modal">Preview</a>
-                                <div class="modal fade" role="dialog" tabindex="-1" id="preview<?php echo $view['id'];?>">
+                                <div class="modal fade" role="dialog"  id="preview<?php echo $view['id'];?>">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -149,21 +184,40 @@ include_once 'assets/php/dbProfile.php';
                                                                 <td><?php echo $view['gcash'] ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Screenshot</td>
-                                                                <?php 
-                                        if ($view['bookimg'] == "")
-                                        { ?>
+                                                                <td>Reference Number</td>
+                                                                        <?php 
+                                                                        if ($view['RefNum']=="")
+                                                                        { ?>
+                                                                        <td>No Reference Number</td>
+                                                                     <?php 
+                                                                        }
+                                                                        else
+                                                                        {  ?>
+                                                                         <td><?php echo $view['RefNum'] ?></td>
 
-                                            <td>No ScreenShot</td>
-                                    <?php
-                                        }
-                                        else
-                                        {?>
-                                     <td><img src="./assets/imageDb/<?php echo $view['bookimg'];?>" width="100%" height="100%"> </td>
+                                                                        <?php } ?>    
+                                                            </tr>
 
-                                    <?php
-                                        }
-                                        ?>
+
+                                                            <tr>
+                                                                <td>Screenshot</td>                                                                                                                                                                                                                                                                                                
+                                                               <?php
+                                                               if($view['bookimg'] == "")
+                                                               { ?>
+                                                                   <td>No ScreenShot</td>
+                                                              <?php  }
+                                                               else{
+                                                                  $image_path_filename = './assets/imageDb/'.$view['bookimg'];
+                                                                  if (file_exists($image_path_filename)) { ?>
+                                                                  
+                                                             <td><img src="./assets/imageDb/<?php echo $view['bookimg'];?>" width="100%" height="100%"> </td>
+                                                        <?php } else { ?>
+
+                                                            <td>No ScreenShot</td>
+                                                         <?php  } 
+                                                        }?>
+
+    
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -186,8 +240,11 @@ include_once 'assets/php/dbProfile.php';
                             ?>
 
                             <div style="<?php echo $style ?>">
+
                             <a class="btn btn-danger btn-lg" role="button" href="#payment<?php echo $view['id'];?>" data-bs-toggle="modal">Pay</a>
-                                <div class="modal fade" role="dialog" tabindex="-1" id="payment<?php echo $view['id'];?>">
+
+                            
+                                <div class="modal fade" role="dialog"  id="payment<?php echo $view['id'];?>" style="z-index: 1400;">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -215,30 +272,54 @@ include_once 'assets/php/dbProfile.php';
                                                                         <div class="col" style="padding: 10px;">
                                                                         <input type="hidden" name= "pID" value ="<?php echo $view['id'];?>">
                                                                     <input type="hidden" name= "profile" value ="<?php echo $_SESSION['user'];?>">
-                                                                            <p class="text-center">Gcash Number</p><input class="form-control" name="gcash" type="text" placeholder="Gcash Number" required="">
+                                                                            <p class="text-center">Gcash Number</p><input class="form-control" name="gcash" type="text" placeholder="Gcash Number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required="">
                                                                         </div>
                                                                     </div>
+
                                                                     <div class="row">
                                                                         <div class="col" style="padding: 10px;">
                                                                             <p class="text-center">Account Password</p><input class="form-control" name="accpass" type="password" required="" placeholder="Account Password">
                                                                         </div>
                                                                     </div>
+
+                                                                    <div class="row">
+                                                                     <div class="col" style="padding: 10px;">
+                                                                         <p class="text-center">Reference Number</p><input class="form-control" name="refNum" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required="" placeholder="Reference Number">
+                                                                     </div>
+                                                                    </div>
+
+
                                                                     <div class="row">
                                                                         <div class="col" style="padding: 10px;">
                                                                             <p class="text-center">Upload Screenshot</p>
-                                                                            <input id="inputimg" onchange="imgval()" name="bookimg" class="form-control form-control-sm" type="file" required accept="image/png, image/jpg, image/jpeg">
+                                                                            <input id="inputimg" onchange="imgval()" name="bookimg" class="form-control form-control-sm" type="file"  accept="image/png, image/jpg, image/jpeg">
                                                                          <span id='message'></span>
                                                                         </div>
-                                                                    </div>
+                                                                    </div>           
+
                                                                 </div>
                                                                 <div class="col d-flex justify-content-center align-items-center"><img src="assets/img/gcash.jpg" style="width: 234px;"></div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col d-flex justify-content-center" style="padding: 17px;">
-                                                                <button class="btn btn-primary" type="submit" name="pay" >Submit</button></div>
+
+                                                                <button class="btn btn-primary" type="submit" name="pay" >Submit</button>
+
+                                                              
+                                                                </div>
+
+                                                                <div class="col d-flex justify-content-center" style="padding: 17px;">
+                                                                    <button class="btn btn-warning" type="button" name="walkIn" >Walk In</button>
+
+                                                                    <!-- <a class="btn btn-warning" role="button" href="#walkIn" data-bs-toggle="modal" >Walk In to Payment</a> -->
+                                                                   
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
+
+
                                                 </form>
                                             </div>
                                             <div class="modal-footer"></div>

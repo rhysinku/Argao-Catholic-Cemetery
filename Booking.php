@@ -23,6 +23,12 @@ else{
                         <h4>Booking Form</h4>
                     </div>
                 </div>
+
+                <div class="row">
+                 <div class="col">
+                     <p class="text-center text-secondary">Booking  takes hour to process before the mass schedule</p>
+                 </div>
+            </div>      
                 <div class="row">
                     <div class="col">
                         <div class="row" style="padding: 10px;">
@@ -76,8 +82,8 @@ else{
                 </div>
                 <div class="row" style="margin: 33px;">
                     <div class="col d-flex justify-content-center">
-                        <div><a class="btn btn-primary btn-lg" role="button" href="#myModal" id="preview" data-bs-toggle="modal">Continue</a>
-                            <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
+                        <div><a class="btn btn-primary btn-lg" role="button" href="#continue" id="preview" data-bs-toggle="modal">Continue</a>
+                            <div class="modal fade" role="dialog"  id="continue" style="z-index: 1400;">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -129,6 +135,10 @@ else{
                                         <div class="modal-footer">
                                             <button class="btn btn-light" type="submit"  name="draft" >Save to Draft</button>
                                              <button class="btn btn-primary" type="submit" name="pay">Procced to Payment</button>
+                                             <!-- <button class="btn btn-warning" type="submit" name="walkIn">Walk In to Payment</button> -->
+                                             
+                                             <a class="btn btn-warning" role="button" href="#payment" data-bs-toggle="modal" name="walkIn">Walk In to Payment</a>
+                                            
                                             </div>
                                     </div>
                                 </div>
@@ -138,6 +148,26 @@ else{
                 </div>
             </div>       
     </div>
+
+
+    <div class="modal fade" role="dialog" style="z-index: 1600;" id="payment">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Walk-In Payment Information</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <p class="text-center text-secondary">Upon receiving the payment and approving from the admin, processing can take at least an<span style="font-weight: bold;color: var(--bs-red);"> hour</span> .</p>
+            </div>
+            <div class="modal-footer">
+               
+                <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" name="walkIn" type="submit">Proceed</button>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
     </form>
 
     <script type="text/javascript">
