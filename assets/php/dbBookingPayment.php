@@ -38,7 +38,7 @@ if(isset($_POST["pay"]))
             else{
 
                    
-                 $sql2 = "UPDATE booking SET adminapprove = '$admin' ,  gcash='$gcash' ,Refnum = '$refNum', bookimg = '$newimage' WHERE id = '$id2'";
+                 $sql2 = "UPDATE booking SET adminapprove = '$admin' ,  gcash='$gcash' ,Refnum = '$refNum', bookimg = '$newimage', corpsetimestamp = now() WHERE id = '$id2'";
                  if(mysqli_query($conn,$sql2))
                  {
                 
@@ -70,6 +70,41 @@ if(isset($_POST["pay"]))
    //header("Location: ../Payment.php?error=Success");
     
 }
+
+elseif(isset($_POST["walkIN"]))
+{
+    $userPass = $_POST["userPass"];
+     $sql4 = "SELECT * FROM user WHERE userId = '$id'";
+     $result = mysqli_query($conn, $sql4);
+     $row = mysqli_fetch_array($result);
+ if($userPass == $row['userPwd'])
+ {
+    $dateWalkin = date('y-m-d', strtotime($_POST["dateWalkin"]));
+    $payment = "walkIn";
+    $sql5 = "UPDATE booking SET adminapprove = '$admin' ,  dateWalkIn='$dateWalkin' ,payment = '$payment', corpsetimestamp = now() WHERE id = '$id2'";
+    if(mysqli_query($conn,$sql5))
+    {
+            header("Location: ../../UserProfile.php?succ=BookSuc");
+
+    }
+                
+ }
+    else
+    {
+        header("Location: ../../BookingPayment.php?error=WalkInIncorrectPass");
+    
+    }
+
+}
+
+
+
+
+
+
+
+
+
 
 elseif(isset($_POST["pending"]))
 {

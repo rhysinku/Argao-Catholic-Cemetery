@@ -10,9 +10,15 @@ if(isset($_GET["error"]))
     }
 
     if ($_GET["error"] == "IncorrectRefNum")
-{
-    $error = " <span class='text-danger' style='font-size: 12px;' >Reference Number Already Exist</span> ";
-}
+    {
+        $error = " <span class='text-danger' style='font-size: 12px;' >Reference Number Already Exist</span> ";
+    }
+
+    if ($_GET["error"] == "WalkInIncorrectPass")
+    {
+        $error = " <span class='text-danger' style='font-size: 12px;' >Incorrect Password from Walk In Payment</span> ";
+    }
+
    
 }
 else
@@ -26,6 +32,12 @@ if(isset($_GET["succ"]))
     {
         $succ = " <p class='text-center text-secondary'>Upon approving from the admin, processing can take at least an<span style='font-weight: bold;color: var(--bs-red);'> hour</span> .</p>";
     }
+
+    if($_GET["succ"]== "BookSuc")
+    {
+        $succ = " <p class='text-center text-secondary'>Upon approving from the admin, processing can take at least an<span style='font-weight: bold;color: var(--bs-red);'> hour</span> .</p>";
+    }
+
 }
 else
 {
@@ -118,13 +130,33 @@ include_once 'assets/php/dbProfile.php';
     $date = date(" F, d, Y h:i A",strtotime($view['corpsetimestamp'])); 
     $dob = date(" F, d, Y",strtotime($view['dateBirth']));
     $dod = date(" F, d, Y",strtotime($view['dateDeath']));
+    $dateWalkIn = date(" F, d, Y",strtotime($view['dateWalkIn']));
+
+    if($view['payment'] == 'walkIn')
+    {
+        $payment = 'Walk In';
+    }
+    if($view['payment'] == 'queue')
+    {
+        $payment = 'Queue';
+    }
+    
+    if($view['payment'] == 'pending')
+    {
+        $payment = 'Pending';
+    }
+    else 
+    {
+        $payment = $view['payment'];
+    }
+        
                 ?>
                 <tbody>
                     <tr style="height: 50px;">
                         <td><?php echo $count++; ?> </td>
                         <td><?php echo $view['fnamecorpse']; ?></td>
                         <td><?php echo $date ?></td>
-                        <td><?php echo $view['payment']; ?></td>
+                        <td><?php echo $payment ?></td>
                         <td><?php echo $view['adminapprove'] ?></td>
                         <td class="d-flex" style="padding: 0px;">
                             <div style="height: 0px;">
@@ -177,8 +209,24 @@ include_once 'assets/php/dbProfile.php';
                                                             </tr>
                                                             <tr>
                                                                 <td>Payment</td>
-                                                                <td><?php echo $view['payment'] ?></td>
+                                                                <td>
+                                                                    <?php echo $payment; ?>
+                                                                
+                                                            </td>
                                                             </tr>
+                                                        <?php if($payment == 'Walk In' ){
+                                                             $styletd = "";
+                                                        }
+                                                        
+                                                        else{
+                                                            $style = "visibility:hidden";
+                                                        } ?>
+                                                            <tr style="<?php echo $style ?>" >
+                                                            <td>Date Walk In</td>
+                                                            <td><?php echo $dateWalkIn ?></td>
+                                                         </tr>                                   
+
+
                                                             <tr>
                                                                 <td>Gcash Number</td>
                                                                 <td><?php echo $view['gcash'] ?></td>
@@ -197,7 +245,6 @@ include_once 'assets/php/dbProfile.php';
 
                                                                         <?php } ?>    
                                                             </tr>
-
 
                                                             <tr>
                                                                 <td>Screenshot</td>                                                                                                                                                                                                                                                                                                
@@ -229,7 +276,7 @@ include_once 'assets/php/dbProfile.php';
                                 </div>
                             </div>
 
-                            <?php if($view['payment'] == 'queue' || $view['adminapprove'] == 'Not Approve')
+                            <?php if($view['payment'] == 'queue' || $view['adminapprove'] == 'Walk In Not Approve' || $view['adminapprove'] == 'Gcash Not Approve')
                             {
                                 $style = "";
                             }
@@ -309,9 +356,9 @@ include_once 'assets/php/dbProfile.php';
                                                                 </div>
 
                                                                 <div class="col d-flex justify-content-center" style="padding: 17px;">
-                                                                    <button class="btn btn-warning" type="button" name="walkIn" >Walk In</button>
+                                                                    <!-- <button class="btn btn-warning" type="button" name="walkIn" >Walk In</button> -->
 
-                                                                    <!-- <a class="btn btn-warning" role="button" href="#walkIn" data-bs-toggle="modal" >Walk In to Payment</a> -->
+                                                                    <a class="btn btn-warning" role="button" href="#walkIN<?php echo $view['id'];?>" data-bs-toggle="modal" >Walk In to Payment</a>
                                                                    
                                                                 </div>
                                                             </div>
@@ -330,6 +377,39 @@ include_once 'assets/php/dbProfile.php';
                             </div>
                         </td>
                     </tr>
+
+
+                        <div class="modal fade" role="dialog" style="z-index: 1600;" id="walkIN<?php echo $view['id'];?>">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Walk-In Payment Information</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="assets/php/dbWalkIn.php">
+            <div class="modal-body">
+            <p class="text-center text-secondary">Upon receiving the payment and approving from the admin, processing can take at least an<span style="font-weight: bold;color: var(--bs-red);"> hour</span> .</p>
+            <div class="d-flex justify-content-center">
+            <input type="hidden" name= "pID" value ="<?php echo $view['id'];?>">
+            <input type="hidden" name= "profile" value ="<?php echo $_SESSION['user'];?>">
+               <p style="margin: 6px;">Date of Payment</p><input class="form-control" type="date" name="dateWalkin" required style="width: 50%;" />
+             </div>
+
+             <div class="d-flex justify-content-center" style="padding: 5px;">
+                  <p style="margin: 6px;">User Password</p><input type="password" style="width: 50%;" required name="userPass" placeholder="User Password" />
+              </div>
+
+    
+        </div>
+            <div class="modal-footer">
+               
+                <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-primary" name="walkIn" type="submit">Proceed</button>
+                </form>      
+            </div>
+        </div>
+    </div>
+</div>
+
                     <?php  endwhile ?>
                 </tbody>
             </table>

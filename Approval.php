@@ -36,6 +36,8 @@ $conn = mysqli_connect("localhost", "root", "", "cemetery");?>
                     
                             $dob = date(" F, d, Y",strtotime($data['dateBirth']));
                             $dod = date(" F, d, Y",strtotime($data['dateDeath']));
+                          
+                            
 
                             
                             ?>
@@ -81,17 +83,71 @@ $conn = mysqli_connect("localhost", "root", "", "cemetery");?>
                 </div>
                 <div class="row">
                     <div class="col">
+                    <?php 
+                            if($data['payment']=="pending"){
+                                $payment = 'Gcash';
+                            }
+                            elseif($data['payment']=="walkIn"){
+                                $payment = 'Walk In';
+                            }
+                        
+                        ?>
+
                         <p style="font-size: 10px;height:0;">Payment</p>
-                        <p class="text-center"><?php echo $data['payment'] ?></p>
+                        <p class="text-center"><?php echo $payment ?></p>
                     </div>
                     <div class="col">
                         <p style="font-size: 10px;height:0;">Gcash</p>
                         <p class="text-center"><?php echo $data['gcash'] ?></p>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col">
+                        <?php 
+                        if($payment == "Walk In")
+                        {
+                            $dateWalkIn = date(" F, d, Y",strtotime($data['dateWalkIn']));
+                        }
+                        else
+                        {
+                            $dateWalkIn = "No Walk In Date";
+                        }
+                        ?>
+                        <p style="font-size: 10px;height:0;">Walk In Date</p>
+                        <p class="text-center"><?php echo $dateWalkIn ?></p>
+                    </div>
+                    <div class="col">
+                        <p style="font-size: 10px;height:0;">Reference Number</p>
+                        <p class="text-center"><?php echo $data['RefNum'] ?></p>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col d-flex justify-content-center">
-                        <img src="assets/imageDb/<?php echo $data['bookimg'] ?>" style="margin: 10px; width: 50%">
+                        
+                    <?php
+                                                               if($data['bookimg'] == "")
+                                                               { ?>
+                                                                   <h1>No ScreenShot</h1>
+                                                              <?php  }
+                                                               else{
+                                                                  $image_path_filename = './assets/imageDb/'.$data['bookimg'];
+                                                                  if (file_exists($image_path_filename)) { ?>
+                                                                  
+                                                             <img src="assets/imageDb/<?php echo $data['bookimg'] ?>" style="margin: 10px; width: 50%"> 
+                                                        <?php } else { ?>
+
+                                                            <h1>No ScreenShot</h1>
+                                                         <?php  } 
+                                                        }?>
+     
+
+
+
+
+
+                       
                     </div>
                 </div>
                 <?PHP endwhile ?> 
@@ -100,9 +156,26 @@ $conn = mysqli_connect("localhost", "root", "", "cemetery");?>
                         <form method="post" action="assets/php/dbApproval.php">
                             <div class="d-flex justify-content-center">
                               <input type="hidden" value="<?php echo $idurl; ?>" name="id">
-                                <button class="btn btn-primary" type="submit" name="yes" style="background: var(--bs-green);margin: 10px;">Yes, I receive the Payment</button>
+                              <?php 
+                              if($payment == "Gcash"){
+                                $text="Yes, I receive the Gcash Payment";
+                                $namePay = "Gcash";
+                                $Noname = "GcashNo";
+                                $Notext="No, I did not receive the payment";
+                               
+                              }
+                                elseif($payment == "Walk In"){
+                                    $text = "Yes, I accept the Walk In Payment";
+                                    $namePay = "walkIn";
+                                    $Noname = "WalkinNo";
+                                    $Notext="No, I did not Approve the Walk In payment";
+    
+                                  
+                                }
+                                        ?>
+                                <button class="btn btn-primary" type="submit" name="<?php echo $namePay; ?>" style="background: var(--bs-green);margin: 10px;"><?php echo $text ?></button>
                                 <button class="btn btn-primary" type="submit" name="later" style="background: var(--bs-gray);margin: 10px;">Maybe, Later</button>
-                                <button class="btn btn-primary" type="submit" name="no" style="background: var(--bs-red);margin: 10px;">No, I did not receive the payment</button></div>
+                                <button class="btn btn-primary" type="submit" name="<?php echo $Noname; ?>" style="background: var(--bs-red);margin: 10px;"><?php echo $Notext ?></button></div>
                         </form>
                     </div>
                 </div>

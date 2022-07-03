@@ -12,10 +12,17 @@ $connect = mysqli_connect("localhost", "root", "", "cemetery");
  {
   while($row = mysqli_fetch_array($result))
   {
+    if($row['payment']=="pending"){
+        $payment = 'Gcash';
+    }
+    elseif($row['payment']=="walkIn"){
+        $payment = 'Walk In';
+    }
+
    $output .= 
    '<a class="dropdown-item d-flex flex-column" href="Approval.php?ID='.$row["id"].'&&Name='.$row["userName"].'">
    <strong>'.$row["userName"].'</strong>
-   <small>Send a payment approval</small>
+   <small>Send a '.$payment.' Payment Approval</small> 
 </a>';
   //  '
   //  <li>

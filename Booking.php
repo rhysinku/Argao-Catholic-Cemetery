@@ -137,7 +137,7 @@ else{
                                              <button class="btn btn-primary" type="submit" name="pay">Procced to Payment</button>
                                              <!-- <button class="btn btn-warning" type="submit" name="walkIn">Walk In to Payment</button> -->
                                              
-                                             <a class="btn btn-warning" role="button" href="#payment" data-bs-toggle="modal" name="walkIn">Walk In to Payment</a>
+                                             <!-- <a class="btn btn-warning" role="button" href="#walkIN" data-bs-toggle="modal" >Walk In to Payment</a> -->
                                             
                                             </div>
                                     </div>
@@ -150,23 +150,32 @@ else{
     </div>
 
 
-    <div class="modal fade" role="dialog" style="z-index: 1600;" id="payment">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4>Walk-In Payment Information</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <p class="text-center text-secondary">Upon receiving the payment and approving from the admin, processing can take at least an<span style="font-weight: bold;color: var(--bs-red);"> hour</span> .</p>
-            </div>
-            <div class="modal-footer">
-               
-                <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" name="walkIn" type="submit">Proceed</button>
-               
-            </div>
-        </div>
-    </div>
-</div>
+    <!-- <div class="modal fade" role="dialog" style="z-index: 1600;" id="walkIN"> -->
+    <!-- <div class="modal-dialog" role="document"> -->
+        <!-- <div class="modal-content"> -->
+            <!-- <div class="modal-header"> -->
+                <!-- <h4>Walk-In Payment Information</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            <!-- </div> -->
+            <!-- <div class="modal-body"> -->
+            <!-- <p class="text-center text-secondary">Upon receiving the payment and approving from the admin, processing can take at least an<span style="font-weight: bold;color: var(--bs-red);"> hour</span> .</p> -->
+            <!-- <div class="d-flex justify-content-center"> -->
+               <!-- <p style="margin: 6px;">Date of Payment</p><input class="form-control" type="date" name="dateWalkin" required style="width: 50%;" /> -->
+             <!-- </div> -->
+<!--  -->
+             <!-- <div class="d-flex justify-content-center" style="padding: 5px;"> -->
+                  <!-- <p style="margin: 6px;">User Password</p><input type="password" style="width: 50%;" required name="userPass" placeholder="User Password" /> -->
+              <!-- </div> -->
+<!--  -->
+    <!--  -->
+        <!-- </div> -->
+            <!-- <div class="modal-footer"> -->
+               <!--  -->
+                <!-- <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" name="walkIn" type="submit">Proceed</button> -->
+               <!--  -->
+            <!-- </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+<!-- </div> -->
 
     </form>
 

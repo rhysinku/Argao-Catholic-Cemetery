@@ -2,6 +2,8 @@
 
 require_once "dbconnection.php";
 
+$adminapprove='waiting';
+
 if(isset($_POST["pay"]))
 {
     
@@ -58,3 +60,25 @@ if(isset($_POST["draft"]))
          header("Location: ../../UserProfile.php?suc='$payment'");
    
 }
+
+
+// if(isset($_POST["walkIn"]))
+// {
+// 
+        // $userId =$_POST["id"];
+        // $fname = $_POST["fname"];
+        // $lname = $_POST["lname"];
+        // $gender = $_POST["gender"];
+        // $typel = $_POST["typel"];
+        // $dob = date('y-m-d', strtotime($_POST["dob"])); 
+        // $dod = date('y-m-d', strtotime($_POST["dod"]));
+        // $national = $_POST["national"];
+        // $religion = $_POST["religion"];
+//     $payment = "walkIn";
+//     $sql = "INSERT INTO booking (userid, fnamecorpse, lnamecorpse, nationality, gender, typegrave, dateBirth, dateDeath, corpseReligion ,payment)VALUES ('$userId', '$fname', '$lname' , '$national' , '$gender' , '$typel' , '$dob' , '$dod', '$religion' , '$payment')";
+        // mysqli_query($conn,$sql);
+        //  header("Location: ../../UserProfile.php?suc='$payment'");
+// 
+// 
+// 
+// }

@@ -12,6 +12,16 @@ if(isset($_GET["error"]))
 {
     $error = " <span class='text-danger' style='font-size: 12px;' >Reference Number Already Exist</span> ";
 }
+    if ($_GET["error"] == "WTF")
+    {
+        $error = " <span class='text-danger' style='font-size: 12px;' >Something Went Wrong</span> ";
+    }
+
+    if ($_GET["error"] == "WalkInIncorrectPass")
+    {
+        $error = " <span class='text-danger' style='font-size: 12px;' >Walk In Password Incorrect</span> ";
+    }
+
    
 }
 else
@@ -88,7 +98,10 @@ else
 
                                 <a class="btn btn-primary" style="margin: 10px;"  role="button" href="#payment" data-bs-toggle="modal" >Send Payment</a>
 
-                                <button class="btn btn-warning" type="submit"  role="button" name="walkIn" style="margin: 10px;"  formnovalidate >Walk In</button></div>
+                                <!-- <button class="btn btn-warning" type="submit"  role="button" name="walkIn" style="margin: 10px;"  formnovalidate >Walk In</button> -->
+                                <a class="btn btn-warning" type="submit"  role="button" href="#walkin" data-bs-toggle="modal" style="margin: 10px;"  formnovalidate >Walk In</a>
+                            
+                            </div>
                             
                         </div>
                     </div>
@@ -114,9 +127,56 @@ else
             </div>
         </div>
     </div>
+  </div>
+
+ 
+  </form>
+
+  <div class="modal fade" role="dialog" tabindex="-1" id="walkin">
+   <div class="modal-dialog" role="document">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h4>Walk-In Process Information</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           <div class="modal-body">
+         
+           <div style="filter: blur(0px);">
+    <div class="row">
+        <div class="col">
+            <p>Wish date to pay in walk in?<br /></p>
+        </div>
+    </div>
+    <form method="POST" action="assets/php/dbBookingPayment.php">
+        <div class="row" style="padding: 5px;">
+            <div class="col">
+                <p class="text-secondary" style="font-size: 12px;">Upon adding the date of walk-in payment the <span style="color: var(--bs-red);font-weight: bold;">Admin</span> will <span style="color: var(--bs-teal);font-weight: bold;">approve</span> the process to continue</p>
+                <div class="d-flex justify-content-center">
+    <p style="margin: 6px;">Date of Payment</p><input class="form-control" type="date" name="dateWalkin" required style="width: 50%;" />
+  </div>
+
+        <div class="row">
+          <div class="col">
+              <div class="d-flex justify-content-center" style="padding: 5px;">
+                  <p style="margin: 6px;">User Password</p><input type="password" style="width: 50%;" required name="userPass" placeholder="User Password" />
+              </div>
+          </div>
+        </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex flex-row justify-content-center"><button class="btn btn-secondary" type="submit" style="margin: 15px;">Cancel</button>
+            <button class="btn btn-success" type="submit" style="margin: 15px;" name="walkIN">Proceed</button></div>
+        </div>
+    </form>
 </div>
 
-    </form>
+           </div>
+       </div>
+   </div>
+ </div>
+
+ 
 
     <script type="text/javascript">
         function imgval(){

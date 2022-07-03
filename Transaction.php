@@ -38,7 +38,7 @@ require_once 'assets/php/dbconnection.php';
                     </thead>
                     <?php 
                     $num= 1;
-                    $tableview = $conn->query("SELECT * FROM booking LEFT JOIN user ON booking.userid = user.userId");
+                    $tableview = $conn->query("SELECT * FROM booking LEFT JOIN user ON booking.userid = user.userId ORDER BY booking.corpsetimestamp DESC");
                     while ($view = $tableview->fetch_assoc()):
                         $bdate = date(" F, d, Y h:i A",strtotime($view['corpsetimestamp'])) ;
                         $dob = date(" F, d, Y h:i A",strtotime($view['dateBirth'])) ;
@@ -106,25 +106,48 @@ require_once 'assets/php/dbconnection.php';
                                                                     <td><?php echo $view['payment']; ?></td>
                                                                 </tr>
                                                                 <tr>
+                                                                <td>Reference Number</td>
+                                                                        <?php 
+                                                                        if ($view['RefNum']=="")
+                                                                        { ?>
+                                                                        <td>No Reference Number</td>
+                                                                     <?php 
+                                                                        }
+                                                                        else
+                                                                        {  ?>
+                                                                         <td><?php echo $view['RefNum'] ?></td>
+
+                                                                        <?php } ?>    
+                                                            </tr>
+
+                                                                <tr>
                                                                     <td>Gcash Number</td>
                                                                     <td><?php echo $view['gcash']; ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Screenshot</td>
-                                                                    <?php 
-                                        if ($view['bookimg'] == "")
-                                        { ?>
 
-                                            <td>No ScreenShot</td>
-                                    <?php
-                                        }
-                                        else
-                                        {?>
-                                     <td class="d-flex justify-content-center"><img src="./assets/imageDb/<?php echo $view['bookimg'];?>" width="50%"></td>
+                                                                    <?php
+                                                               if($view['bookimg'] == "")
+                                                               { ?>
+                                                                   <td>No ScreenShot</td>
+                                                              <?php  }
+                                                               else{
+                                                                  $image_path_filename = './assets/imageDb/'.$view['bookimg'];
+                                                                  if (file_exists($image_path_filename)) { ?>
+                                                                  
+                                                                  <td class="d-flex justify-content-center"><img src="./assets/imageDb/<?php echo $view['bookimg'];?>" width="50%"></td>
+                                                        <?php } else { ?>
 
-                                    <?php
-                                        }
-                                        ?>
+                                                            <td>No ScreenShot</td>
+                                                         <?php  } 
+                                                        }?>
+
+                                     
+
+                                   
+                                   
+                                   
 
                                                                 </tr>
                                                             </tbody>
@@ -175,7 +198,7 @@ require_once 'assets/php/dbconnection.php';
     </div>
 
     <?php
-session_start();
+// session_start();
 if (isset($_SESSION['userID']))
 {
     if($_SESSION['userID'] == 1)
