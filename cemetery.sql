@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2022 at 01:05 PM
+-- Generation Time: Jul 04, 2022 at 08:12 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -37,31 +37,30 @@ CREATE TABLE `booking` (
   `typegrave` varchar(150) NOT NULL,
   `dateBirth` date NOT NULL,
   `dateDeath` date NOT NULL,
-  `corpseAddress` varchar(50) NOT NULL,
+  `RefNum` varchar(50) NOT NULL,
   `corpseReligion` varchar(50) NOT NULL,
   `payment` varchar(50) NOT NULL,
   `adminapprove` varchar(20) NOT NULL,
   `gcash` varchar(50) NOT NULL,
   `bookimg` varchar(255) NOT NULL,
-  `corpsetimestamp` datetime NOT NULL DEFAULT current_timestamp()
+  `corpsetimestamp` datetime NOT NULL DEFAULT current_timestamp(),
+  `dateWalkIn` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='teest';
 
 --
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`id`, `userid`, `fnamecorpse`, `lnamecorpse`, `nationality`, `gender`, `typegrave`, `dateBirth`, `dateDeath`, `corpseAddress`, `corpseReligion`, `payment`, `adminapprove`, `gcash`, `bookimg`, `corpsetimestamp`) VALUES
-(4, 6, 'Jackson Gilliam', 'Chantale Mcpherson', 'Sit id nesciunt au', 'Female', 'Public', '1986-05-25', '1982-06-06', '', 'Enim itaque qui debi', 'pending', 'waiting', '09273743328', 'CemImg-622dbc025e41e6.19493725.facial service.jpg', '2022-03-13 17:40:09'),
-(5, 6, 'Quyn Kirkland', 'Russell Dunlap', 'Ut pariatur Et comm', 'Male', 'Private', '1981-05-12', '2011-03-18', '', 'Veniam magnam nulla', 'pending', 'waiting', '09273743328', 'CemimgProfile-622ef95460f662.59037878.Gojo Satoru 2.jpg', '2022-03-13 17:42:06'),
-(6, 6, 'Iris Carter', 'Libby Murphy', 'Aut qui reiciendis n', 'Female', 'Public', '2006-08-12', '2005-12-19', '', 'Officia sapiente vol', 'pending', 'Not Approve', '09273743328', 'CemimgProfile-622ef8759f0d31.23027155.junk.jpg', '2022-03-13 17:47:52'),
-(8, 6, 'Preston Ashley', 'Ulysses Stein', 'Quam non blanditiis ', 'Female', 'Public', '2016-03-08', '1993-09-27', '', 'Explicabo At ad ten', 'queue', '', '', '', '2022-03-14 17:11:37'),
-(10, 12, 'Hadassah Peters', 'Tyler Gaines', 'Est ad reprehenderit', 'Female', 'Public', '1975-08-19', '1972-07-26', '', 'Impedit at voluptat', 'queue', '', '', '', '2022-03-14 17:47:33'),
-(11, 4, 'kyle', 'kyle', 'Filipino', 'Female', 'Public', '2017-03-08', '2022-03-09', '', 'Catholic', 'pending', 'waiting', 'sdfgdsfg', 'CemimgProfile-624a9606820e74.31055796.video showoff.png', '2022-04-04 14:53:58'),
-(12, 4, 'Zeph Jacobs', 'Gretchen Wall', 'Magni pariatur Repr', 'Female', 'Public', '1993-10-05', '1974-06-01', '', 'Beatae reprehenderit', 'pending', 'Not Approve', 'Marksse', 'CemImg-62616c21354227.96628927.headercover.jpg', '2022-04-21 22:36:54'),
-(13, 22, 'Preston Wall', 'Kasper Carver', 'Sed dolor pariatur ', 'Female', 'Private', '1993-08-15', '2006-09-07', '', 'Tenetur expedita und', 'Paid', 'Approve', '099999', 'CemimgProfile-626206ade08034.92071317.headercover.jpg', '2022-04-22 09:36:45'),
-(14, 22, 'Charity Smith', 'Sybil Hebert', 'Ea aperiam voluptate', 'Male', 'Private', '2018-07-10', '2018-01-22', '', 'Sint reiciendis sunt', 'queue', '', '', '', '2022-04-22 09:58:56'),
-(15, 22, 'Amelia Hartman', 'Shelly Mcmahon', 'Dolorem excepteur cu', 'Female', 'Public', '1982-04-08', '1973-04-01', '', 'Fugiat rerum atque s', 'queue', '', '', '', '2022-04-22 10:01:16'),
-(16, 4, 'Harlan Holman', 'Aubrey Decker', 'Eu eos voluptatibus ', 'Male', 'Public', '2017-07-12', '2010-12-04', '', 'Modi sed exercitatio', 'Paid', 'Approve', '0999999', 'CemimgProfile-62620fe5dd3ac8.77989975.headercover.jpg', '2022-04-22 10:16:05');
+INSERT INTO `booking` (`id`, `userid`, `fnamecorpse`, `lnamecorpse`, `nationality`, `gender`, `typegrave`, `dateBirth`, `dateDeath`, `RefNum`, `corpseReligion`, `payment`, `adminapprove`, `gcash`, `bookimg`, `corpsetimestamp`, `dateWalkIn`) VALUES
+(1, 2, 'Judith Chapman', 'Hadley Watkins', 'Sint ut sunt expli', 'Male', 'Private', '2019-02-04', '1996-10-10', '4', 'Saepe totam quia occ', 'pending', 'waiting', '09273743328', 'CemimgProfile-62befaf872bed2.12848950.', '2022-07-01 21:47:36', '0000-00-00'),
+(2, 2, 'Luke Mitchell', 'Elmo Santos', 'Occaecat aut et quia', 'Female', 'Public', '1973-10-15', '1992-11-19', '', 'Rerum consequatur s', 'pending', 'Walk In Not Approve', '', '', '2022-07-03 11:53:10', '2022-07-20'),
+(3, 2, 'Kibo Hardin', 'Francis Webster', 'Odio minima quos rer', 'Male', 'Private', '2022-10-18', '1986-04-04', '2', 'Pariatur Non sed eu', 'pending', 'waiting', '09273743328', 'CemImg-62befa4b21cb08.14804738.', '2022-07-01 21:42:03', '0000-00-00'),
+(4, 2, 'Sylvester Pitts', 'Nissim Graham', 'Cillum minus soluta ', 'Male', 'Public', '1981-02-15', '2019-11-15', '3', 'Nisi adipisicing in ', 'pending', 'waiting', '09273743328', 'CemImg-62befa6fe69638.81958508.', '2022-07-01 21:44:52', '0000-00-00'),
+(5, 2, 'Forrest Chandler', 'Noble Rosario', 'Quia et eiusmod labo', 'Male', 'Public', '1986-08-03', '1982-03-17', '1', 'Placeat sunt lorem', 'pending', 'Gcash Not Approve', '09273743328', 'CemImg-62befe1b722343.17564740.', '2022-07-03 11:54:00', '0000-00-00'),
+(6, 2, 'Kyle Sheppard', 'Nathaniel Cruz', 'Sunt sit est conseq', 'Female', 'Private', '2018-12-02', '2004-12-28', '', 'Non duis dolore pers', 'Walk In', 'Walk In Approve', '', '', '2022-07-02 11:59:16', '2022-07-04'),
+(7, 2, 'Yuri Herring', 'Thaddeus Riley', 'Aliquam sint dolorem', 'Female', 'Public', '1984-09-15', '1993-09-07', '', 'Alias expedita eum u', 'Walk In', 'Walk In Approve', '', '', '2022-07-03 10:25:27', '2022-06-27'),
+(8, 2, 'Jacob Duran', 'Nolan Young', 'Aut voluptatem reru', 'Female', 'Private', '1995-06-04', '1983-05-23', '5', 'Qui tempor unde aliq', 'Gcash Paid', 'Gcash Approve', '09273743328', 'CemimgProfile-62bfb48c71c565.36861361.', '2022-07-02 10:59:24', '0000-00-00'),
+(9, 2, 'Wade Kerr', 'Elaine Hatfield', 'Magna quisquam maior', 'Male', 'Private', '2003-06-28', '1976-12-01', '6', 'Odio mollitia id ni', 'Gcash Paid', 'Gcash Approve', '09273743328', 'CemImg-62c124f46e73d5.82393057.cakeee.jpg', '2022-07-03 13:11:29', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -99,7 +98,7 @@ CREATE TABLE `user` (
   `userName` varchar(200) NOT NULL,
   `userFname` varchar(200) NOT NULL,
   `userLname` varchar(200) NOT NULL,
-  `userContact` int(200) NOT NULL,
+  `userContact` varchar(250) NOT NULL,
   `userAddress` varchar(50) NOT NULL,
   `userMail` varchar(200) NOT NULL,
   `userPwd` varchar(200) NOT NULL,
@@ -111,13 +110,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userId`, `userName`, `userFname`, `userLname`, `userContact`, `userAddress`, `userMail`, `userPwd`, `userTimestamp`) VALUES
-(1, 'Admin', 'Pockey', 'Pepero', 666666, 'Realm of Reality', 'grimreaper@haven.hll', 'admin', '2021-10-15 23:43:28'),
-(4, 'Marksse', 'Mark', 'Neo', 31213123, 'Realm of Reality', 'kyle@gmail.com', '123', '2021-10-20 09:12:26'),
-(5, 'PockeyPepero', 'Rhysin', 'Villahermosa', 99999, 'Cawayan', 'rhysin@gmail.com', 'rhy123', '2021-10-17 19:44:13'),
-(6, 'Mark', 'Mark Neo', 'Mamalias', 123123123, 'Argao', 'mark@gmail.com', 'mark123', '2021-10-17 19:44:55'),
-(12, 'kylee', 'kyle', 'Amaquin', 123123, 'Dalaguete', 'kyle@gmail.com', 'kyle123', '2021-10-19 11:15:43'),
-(21, 'posytumo', 'Buckminster Baxter', 'Jin Cobb', 1123123, 'Occaecat error in ad', 'zahe@mailinator.com', 'Pa$$w0rd!', '2022-03-19 18:26:54'),
-(22, 'tosyvox', 'Quentin Marquez', 'Libby Kelley', 2147483647, 'Aperiam rerum sequi ', 'jikazo@mailinator.com', 'RHYSIN123', '2022-04-22 09:31:09');
+(1, 'Admin', 'Pockey', 'Pepero', '09273743328', 'Cawayan Dalaguete Cebu', 'rhysinvillahermosa16@gmail.com', 'Admin!@#', '2022-07-01 21:36:23'),
+(2, 'Kyleee', 'Kyle', 'Amaquin', '09273743328', 'Cebu City', 'kyle@gmail.com', 'kyle123', '2022-07-01 21:38:42');
 
 --
 -- Indexes for dumped tables
@@ -149,7 +143,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `corpse`
@@ -161,7 +155,7 @@ ALTER TABLE `corpse`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userId` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `userId` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
